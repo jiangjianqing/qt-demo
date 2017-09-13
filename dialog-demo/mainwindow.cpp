@@ -49,7 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->menuBar->setDefaultUp(true);//设置该参数会导致菜单默认向上打开
 
     //工具栏--菜单项的快捷方式
-    QToolBar *toolBar = addToolBar("toolbar");//创建工具栏
+    //QToolBar *toolBar = addToolBar("toolbar");//创建新的工具栏
+    QToolBar *toolBar = ui->mainToolBar;//直接使用默认提供的主工具栏
     toolBar->addAction(pNew);//工具栏添加菜单项--快捷键
 
     QPushButton * b = new QPushButton(this);
