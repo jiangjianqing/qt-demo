@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include <QMenu>
@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
     menu1->addAction("菜单项1");
     menu1->addAction("菜单项2");
 
+
+
     /*注意： 该形式触发存在缺陷，会导致菜单出现但窗体却未出现
     if(QAction *act=menu1->exec(QCursor::pos()))
     {
@@ -28,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QMenu *file_menu=new QMenu("文件");
     file_menu->addAction("打开");//可用返回的QAction 连接槽函数
+
 
     //添加菜单项，添加动作
     QAction * pNew = file_menu->addAction("新建");
@@ -75,10 +78,33 @@ MainWindow::MainWindow(QWidget *parent) :
     //showFullScreen();//重要：窗口全屏显示，连Title栏都不会有
     //resize(..);指定窗口大小
     showMaximized();
+
+    pArray[0] = menu1;
+    pArray[1] = file_menu;
+    //pArray[pPosition++] = btnHello;
+
+    //file_menu->deleteLater();
+   // menu1->deleteLater();
+    //重要：在这里释放指针虽然有效，但界面上的元素也会立即删除，所以通过pArray进行了记录,保留至~MainWindow中释放内存
 }
 
 MainWindow::~MainWindow()
 {
+
+    //重要：申明的内容必须释放，否则容易发生内存泄露
+    //这里进行了3种类型的测试：
+    //1、deleteLater()无法控制泄露，但在MainWindow构造函数中可以
+    //2、delete void*不行，Visual Leak Detector退出时崩溃，无法获得泄露数据
+    //3、delete 原类型指针，获得正确效果！！！！！！
+    QMenu *menu1 = (QMenu *)pArray[0];
+    //void *menu1_p = pArray[0];
+    delete menu1;//->deleteLater();
+    QMenu *file_menu = (QMenu *)pArray[1];
+    //void *file_menu_p = pArray[1];
+    delete file_menu;//->deleteLater();
+
+    qDebug()<<"**程序退出,这里表示正确处理内存泄露";
+    //qt默认
     delete ui;
 }
 

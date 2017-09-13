@@ -1,4 +1,4 @@
-/*
+﻿/*
 #if (defined(Q_OS_UNIX) || defined(Q_CC_MINGW))
     abort(); // trap; generates core dump
 #else
@@ -25,6 +25,7 @@
     //exit(1); // goodbye cruel world
     #include <vld.h>
 #endif
+
 
 #include "mainwindow.h"
 #include <QApplication>
