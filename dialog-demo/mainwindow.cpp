@@ -69,8 +69,12 @@ MainWindow::MainWindow(QWidget *parent) :
     //grip->setVisible(true);//不设置这个见不到它……
 
     //浮动窗口
-        QDockWidget *dock = new QDockWidget(this);//浮动窗口组件QDockWidget
-        addDockWidget(Qt::LeftDockWidgetArea,dock);//浮动窗口里添加其他组件
+    QDockWidget *dock = new QDockWidget(this);//浮动窗口组件QDockWidget
+    addDockWidget(Qt::LeftDockWidgetArea,dock);//浮动窗口里添加其他组件
+
+    //showFullScreen();//重要：窗口全屏显示，连Title栏都不会有
+    //resize(..);指定窗口大小
+    showMaximized();
 }
 
 MainWindow::~MainWindow()
