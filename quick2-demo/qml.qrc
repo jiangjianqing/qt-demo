@@ -7,5 +7,6 @@
         <file>PageCanvas.qml</file>
         <file>PageCanvasForm.ui.qml</file>
         <file>canvas-demo.js</file>
+        <file>DatePicker.qml</file>
     </qresource>
 </RCC>
