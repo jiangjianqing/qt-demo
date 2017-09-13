@@ -1,3 +1,9 @@
+2017.09.13:
+valgrind 3.13存在bug，无法从QT Creator中，等待新版本
+
+g++ main.cpp -o testdump -g -std=c++11-rdynamic
+编译程序的时候，不要忘记加-g选项，这样，使用这些工具我们将会看到所对应的代码行；
+
 
 win10下配置qt：
 
