@@ -1,4 +1,5 @@
-﻿/*
+﻿#include <QtGlobal>
+/*
 #if (defined(Q_OS_UNIX) || defined(Q_CC_MINGW))
     abort(); // trap; generates core dump
 #else
@@ -19,11 +20,12 @@
 #endif
 */
 //重要：在windows下才进行vld内存泄露测试
-#if (defined(Q_OS_UNIX) || defined(Q_CC_MINGW))
+#if defined(Q_OS_WIN32)
+    #include <vld.h>
     //abort(); // trap; generates core dump
 #else
     //exit(1); // goodbye cruel world
-    #include <vld.h>
+
 #endif
 
 
