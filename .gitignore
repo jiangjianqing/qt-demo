@@ -1,3 +1,4 @@
 build-*-Desktop_Qt_*_GCC_*/
 build/
 *.pro.user
+*.autosave
