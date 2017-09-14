@@ -13,7 +13,10 @@ TEMPLATE = app
 
 #引用自定义dll
 #LIBS += D:\git\qt-demo\build\mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug\debug\mydll.lib
-#LIBS += -LD:/git/qt-demo/build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug -lmydll
+#LIBS += -LD:/git/qt-demo/build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
+#重要：从相对路径导入动态库
+LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings

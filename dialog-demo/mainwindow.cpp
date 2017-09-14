@@ -9,7 +9,7 @@
 #include <QDockWidget>
 #include <QLibrary>
 
-//#include "../mydll/mydll.h"
+#include "../mydll/mydll.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    //Mydll addm;
-    //qDebug()<< addm.add(3,4);
+    Mydll addm;
+    qDebug()<<"addm 的结果 = "<< addm.add(3,4);
 
     // DLL显式加载，只需要DLL文件即可，不需要.H和.LIB文件
     // 需要将DLL放到可执行目录中
