@@ -7,12 +7,44 @@
 #include <QSizeGrip>
 #include <QPushButton>
 #include <QDockWidget>
+#include <QLibrary>
+
+//#include "../mydll/mydll.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+    //Mydll addm;
+    //qDebug()<< addm.add(3,4);
+
+    // DLL显式加载，只需要DLL文件即可，不需要.H和.LIB文件
+    // 需要将DLL放到可执行目录中
+    typedef int(*FUN2)(int, int);
+
+
+    //TestA();
+    //testB(1, 300);
+
+    QLibrary lib("mydll.dll");
+    if (lib.load()) {
+        qDebug() << "load ok!";
+
+        FUN2 add = (FUN2)lib.resolve("Mydll::add");
+
+        if (add) {
+            qDebug() << "load add ok!";
+            qDebug() << add(3, 5);
+        }else{
+            qDebug() << "not found add function!";
+        }
+        lib.unload();
+    } else {
+        qDebug() << "load error!";
+    }
 
 
     //---------菜单栏--------------------

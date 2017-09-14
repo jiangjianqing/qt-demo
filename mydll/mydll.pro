@@ -1,19 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-09-11T22:04:17
+# Project created by QtCreator 2017-09-14T21:52:28
 #
 #-------------------------------------------------
 
-QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TARGET = mydll
+TEMPLATE = lib
 
-TARGET = dialog-demo
-TEMPLATE = app
-
-#引用自定义dll
-#LIBS += D:\git\qt-demo\build\mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug\debug\mydll.lib
-#LIBS += -LD:/git/qt-demo/build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug -lmydll
+DEFINES += MYDLL_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -26,18 +21,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    countpanel.cpp
+        mydll.cpp
 
 HEADERS += \
-        mainwindow.h \
-    countpanel.h
+        mydll.h \
+        mydll_global.h 
 
-FORMS += \
-        mainwindow.ui \
-    countpanel.ui
-
-DISTFILES +=
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}
