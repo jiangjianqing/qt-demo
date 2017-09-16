@@ -50,8 +50,9 @@ CONFIG(debug, debug|release){#TARGET = ui_debug
     DEFINES+=QT_NO_DEBUG_OUTPUT
 }
 
+#多国语言支持：推荐使用ISO标准中语言的简写形式
 TRANSLATIONS += lang/en.ts  \
-    lang/cn.ts
+    lang/zh.ts
 
 
 

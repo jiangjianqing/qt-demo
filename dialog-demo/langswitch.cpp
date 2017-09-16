@@ -16,7 +16,7 @@ void LangSwitch::createScreen()
 {
     combo = new QComboBox;
     combo->addItem("English", "en");			//(a)
-    combo->addItem("Chinese", "cn");
+    combo->addItem("Chinese", "zh");
     label = new QLabel;
     updateUI();								//设置标签的内容
     QVBoxLayout* layout = new QVBoxLayout;

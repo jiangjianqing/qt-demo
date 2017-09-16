@@ -41,9 +41,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     //加入多国语言支持，多国语言由langswitch完成
-    //TranslatorUtil::setResourceFormFile();
-    TranslatorUtil::changeTr("cn");
-    //changeTr("zh");
+    //TranslatorUtil::setResourceFormFile();//默认从资源文件中读取，如果要从文件读取多国语言，使用该函数设置
+    TranslatorUtil::changeTr("zh");
     /*
     QTranslator *translator = new QTranslator();
     translator->load("lang/zh.qm");
