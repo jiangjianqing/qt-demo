@@ -20,8 +20,6 @@ private slots:
 
 private:
     Ui::CountPanel *ui;
-
-    const double PI = 3.1415926;
 };
 
 #endif // COUNTPANEL_H

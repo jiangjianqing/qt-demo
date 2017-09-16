@@ -23,11 +23,11 @@ void TranslatorUtil::setResourceFormFile(){//设置为从文件读取
 void TranslatorUtil::changeTr(const QString& langCode)
 {
     static QTranslator* translator;								//(a)
-    if (translator != NULL)
+    if (translator != nullptr)
     {
         qApp->removeTranslator(translator);
         delete translator;
-        translator = NULL;
+        translator = nullptr;
     }
     translator = new QTranslator;
     QString resPrefix = sourceType==ResourceSourceType::fromRes? ":/" : "" ;

@@ -1,5 +1,6 @@
 #include "countpanel.h"
 #include "ui_countpanel.h"
+#include "functions/area.h"
 
 CountPanel::CountPanel(QWidget *parent) :
     QWidget(parent),
@@ -18,6 +19,7 @@ void CountPanel::on_countBtn_clicked()
     QString valueStr = ui->radiusLineEdit->text();
     bool ok;
     int valueInt = valueStr.toInt(&ok);
-    double area = valueInt*valueInt*PI;
-    ui->areaLabel->setNum(area);
+    Area *area = new Area(valueInt);
+    ui->areaLabel->setNum(area->countArea());
+    delete area;
 }
