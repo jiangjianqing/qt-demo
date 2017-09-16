@@ -67,10 +67,10 @@ void StringUtil::doExample(){
 
 
     qDebug()<<StringUtil::pchar2qstring(mm);
-    delete[] mm;
+    delete []mm;
 
     char* mm2 = StringUtil::qstring2pchar(QString("tttttt"));
     qDebug()<<mm2;
-    delete[] mm2;
+    delete []mm2;
     //delete []mm;
 }
