@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-09-16T17:40:30
+# Project created by QtCreator 2017-09-16T17:35:53
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += testlib
 
 QT       -= gui
 
-TARGET = tst_areatest
+TARGET = tst_stringtest
 CONFIG   += console
 CONFIG   -= app_bundle
 
@@ -27,10 +27,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        tst_areatest.cpp \ 
-    ../../functions/area.cpp
+        tst_stringtest.cpp 
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
-
-HEADERS += \
-    ../../functions/area.h

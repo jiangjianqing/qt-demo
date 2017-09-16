@@ -73,13 +73,15 @@ SOURCES += \
         mainwindow.cpp \
     countpanel.cpp \
     langswitch.cpp \
-    util/translatorutil.cpp
+    util/translatorutil.cpp \
+    functions/area.cpp
 
 HEADERS += \
         mainwindow.h \
     countpanel.h \
     langswitch.h \
-    util/translatorutil.h
+    util/translatorutil.h \
+    functions/area.h
 
 FORMS += \
         mainwindow.ui \
