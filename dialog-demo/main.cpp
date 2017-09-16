@@ -21,8 +21,7 @@
 
 
 
-#include "mainwindow.h"
-#include <QApplication>
+
 
 //重要：在windows下并使用vc编译器才使用vld进行内存泄露测试
 #if defined(Q_OS_WIN32) && defined(Q_CC_MSVC) && defined(_DEBUG)
@@ -33,9 +32,25 @@
 
 #endif
 
+#include "mainwindow.h"
+#include <QApplication>
+
+#include "util/translatorutil.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    //加入多国语言支持，多国语言由langswitch完成
+    //TranslatorUtil::setResourceFormFile();
+    TranslatorUtil::changeTr("cn");
+    //changeTr("zh");
+    /*
+    QTranslator *translator = new QTranslator();
+    translator->load("lang/zh.qm");
+    qDebug() << a.applicationDirPath();
+    a.installTranslator(translator);
+    */
+
     MainWindow w;
     w.show();
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>571</width>
-    <height>342</height>
+    <width>696</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>40</x>
       <y>30</y>
       <width>491</width>
-      <height>241</height>
+      <height>171</height>
      </rect>
     </property>
    </widget>
@@ -37,14 +37,37 @@
      <string>自定义组件插入方式1：</string>
     </property>
    </widget>
+   <widget class="LangSwitch" name="widget_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>240</y>
+      <width>321</width>
+      <height>51</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>220</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>多国语言切换</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>571</width>
-     <height>21</height>
+     <width>696</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -59,7 +82,7 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -70,6 +93,12 @@
    <class>CountPanel</class>
    <extends>QWidget</extends>
    <header>countpanel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LangSwitch</class>
+   <extends>QWidget</extends>
+   <header>langswitch.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

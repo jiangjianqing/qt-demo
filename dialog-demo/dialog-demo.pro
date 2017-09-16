@@ -21,10 +21,10 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 
 contains(TARGET_ARCH, x86_64) {
     ARCHITECTURE = x64
-    message("x64")
+    #message("x64")
 } else {
     ARCHITECTURE = x86
-    message("x86")
+    #message("x86")
 }
 
 #make 或make debug -------生成debug版
@@ -32,10 +32,6 @@ contains(TARGET_ARCH, x86_64) {
 #make all                 -------两个版本都生成
 CONFIG+=debug_and_release
 CONFIG(debug, debug|release){#TARGET = ui_debug
-#引用自定义dll
-#LIBS += D:\git\qt-demo\build\mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug\debug\mydll.lib
-#LIBS += -LD:/git/qt-demo/build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
-#重要：从相对路径导入动态库
     win32 {
         LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
     }
@@ -54,6 +50,9 @@ CONFIG(debug, debug|release){#TARGET = ui_debug
     DEFINES+=QT_NO_DEBUG_OUTPUT
 }
 
+TRANSLATIONS += lang/en.ts  \
+    lang/cn.ts
+
 
 
 # The following define makes your compiler emit warnings if you use
@@ -71,14 +70,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    countpanel.cpp
+    countpanel.cpp \
+    langswitch.cpp \
+    util/translatorutil.cpp
 
 HEADERS += \
         mainwindow.h \
-    countpanel.h
+    countpanel.h \
+    langswitch.h \
+    util/translatorutil.h
 
 FORMS += \
         mainwindow.ui \
-    countpanel.ui
+    countpanel.ui \
+    basewidget.ui
 
 DISTFILES +=
+
+RESOURCES += \
+    res.qrc

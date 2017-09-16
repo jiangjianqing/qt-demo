@@ -9,7 +9,21 @@
 #include <QDockWidget>
 #include <QLibrary>
 
+#include "basewidget.h"
+
 #include "../mydll/mydll.h"
+
+void MainWindow::changeEvent(QEvent *e)
+{
+    QWidget::changeEvent(e);
+    switch (e->type()) {
+        case QEvent::LanguageChange:
+            ui->retranslateUi(this);
+            break;
+        default:
+            break;
+    }
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
