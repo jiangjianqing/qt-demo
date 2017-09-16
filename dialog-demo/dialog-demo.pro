@@ -83,8 +83,7 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui \
-    countpanel.ui \
-    basewidget.ui
+    countpanel.ui
 
 DISTFILES +=
 

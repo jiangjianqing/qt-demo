@@ -9,8 +9,6 @@
 #include <QDockWidget>
 #include <QLibrary>
 
-#include "basewidget.h"
-
 #include "../mydll/mydll.h"
 
 void MainWindow::changeEvent(QEvent *e)

@@ -7,7 +7,6 @@
 #endif
 
 #include <QMainWindow>
-#include "basewidget.h"
 
 namespace Ui {
 class MainWindow;
