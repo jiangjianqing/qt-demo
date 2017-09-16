@@ -11,17 +11,50 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = dialog-demo
 TEMPLATE = app
 
+
+#判断CPU类型
+greaterThan(QT_MAJOR_VERSION, 4) {
+    TARGET_ARCH=$${QT_ARCH}
+} else {
+    TARGET_ARCH=$${QMAKE_HOST.arch}
+}
+
+contains(TARGET_ARCH, x86_64) {
+    ARCHITECTURE = x64
+    message("x64")
+} else {
+    ARCHITECTURE = x86
+    message("x86")
+}
+
+#make 或make debug -------生成debug版
+#make release          -------生成release版
+#make all                 -------两个版本都生成
+CONFIG+=debug_and_release
+CONFIG(debug, debug|release){#TARGET = ui_debug
 #引用自定义dll
 #LIBS += D:\git\qt-demo\build\mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug\debug\mydll.lib
 #LIBS += -LD:/git/qt-demo/build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
 #重要：从相对路径导入动态库
-win32 {
-LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
+    win32 {
+        LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
+    }
+    unix{
+        LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_GCC_64bit-Debug -lmydll
+    }
+} else {#TARGET = ui_release
+
+    win32 {
+        LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
+    }
+    unix{
+        LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_GCC_64bit-Release -lmydll
+    }
+    #屏蔽release版本中所有QDebug()提示信息
+    DEFINES+=QT_NO_DEBUG_OUTPUT
 }
 
-unix{
-LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_GCC_64bit-Debug -lmydll
-}
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
