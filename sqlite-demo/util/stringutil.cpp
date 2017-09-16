@@ -51,6 +51,13 @@ QString StringUtil::pchar2qstring(const char *pstr){
  * @brief StringUtil::doExample   |   char*标准用例，测试内存泄露
  */
 void StringUtil::doExample(){
+
+    //char* pt = new char[123]();
+    //pt = new char[456];//上述pt[123]会被valgrind立即检测到泄露,但pt[456]还是无法被检测到，
+    //重要结论：由此 可见pt[456]的泄露需要人工发现&处理，
+    //valgrind的机制也许记录每个指针指向的地址，如果该地址执行过delete则认为被释放；如果到软件退出时该地址都没有被释放则认为内存泄露;
+    //valgrind的机制：指针申请后又被重新申请，软件退出时将判定该指针区域为泄露。
+
     char* mm;
     int len;
     StringUtil::qstring2pchar(QString("1234567"),&mm,&len);
