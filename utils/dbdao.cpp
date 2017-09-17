@@ -17,6 +17,7 @@ DBDao::~DBDao()
 }
 
 QSqlError DBDao::connect(DatabaseConnectInfo & connectInfo){
+    /*
     QString qstrType;
     switch (connectInfo.enumDbType) {
     case DBTYPE::SQLITE:
@@ -29,8 +30,8 @@ QSqlError DBDao::connect(DatabaseConnectInfo & connectInfo){
         qDebug()<<"请输入需要连接的数据库类型!";
         std::abort();
         break;
-    }
-    m_db = QSqlDatabase::addDatabase(qstrType);
+    }*/
+    m_db = QSqlDatabase::addDatabase(connectInfo.strDatabaseDriver);
     m_db.setHostName(connectInfo.strHostName);
     m_db.setDatabaseName(connectInfo.strDatabaseName);
     m_db.setUserName(connectInfo.strUserName);

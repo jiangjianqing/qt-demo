@@ -4,12 +4,8 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
-enum DBTYPE{
-    SQLITE,MYSQL
-};
-
 typedef struct {
-    DBTYPE enumDbType;
+    QString strDatabaseDriver;
     QString strHostName;
     QString strDatabaseName;
     QString strUserName;
