@@ -46,6 +46,11 @@ QSqlQuery DBDao::createQuery(const QString &query){
     return qry;
 }
 
+/**
+ * @brief DBDao::getQuerySize  重要：用于获取QSqlQuery的记录数
+ * @param query
+ * @return
+ */
 int DBDao::getQuerySize(QSqlQuery & query){
     //defaultDB.driver()->hasFeature(QSqlDriver::QuerySize)
     if (m_db.driver()->hasFeature(QSqlDriver::QuerySize)) {

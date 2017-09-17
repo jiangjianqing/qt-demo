@@ -28,6 +28,8 @@ public:
     ~DBDao();
     bool connect(DatabaseConnectInfo &connectInfo);
     QSqlQuery createQuery(const QString &query = QString());
+
+    //重要：用于获取QSqlQuery的记录数
     int getQuerySize(QSqlQuery & query);
     //const QSqlError & getLastError();
 };

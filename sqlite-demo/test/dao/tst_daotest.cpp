@@ -27,6 +27,7 @@ private Q_SLOTS:
     void test2Insert();
     void test3Sort();
     void test4Update();
+    void test5Delete();
 };
 
 DaoTest::DaoTest()
@@ -134,19 +135,41 @@ void DaoTest::test3Sort(){
 }
 
 void DaoTest::test4Update(){
-    m_query.clear();
+
     m_timer.restart();
-/*
-    m_timer.restart();
-    bool success = m_query.exec("select * from automobile order by id desc");
-    int records = m_dao.getQuerySize(m_query);
-    if(success){
-        qDebug()<<QString(QObject::tr("排序 %1 条记录，耗时： %2 ms")).arg(records).arg(m_timer.elapsed());
-    }else{
-        qDebug()<<QString(QObject::tr("排序失败"));
+    bool success;
+
+    QVariant params[9]={
+        "四轮","轿车","富康",rand()%100,rand()%10000,rand()%300,rand()%200000,rand()%52,rand()%100
+    };
+    int records = 100;
+    for(int i=0;i<records;i++){
+        m_query.clear();
+        m_query.prepare(QString("update automobile set attribute=? ,type=?,"
+                                "kind=?,nation=?,"
+                                "carnumber=?,elevaltor=?,"
+                                "distance=?,oil=?,"
+                                "temperature=? where id=%1").arg(i));
+        for(int j=0;j<9;j++){
+            m_query.bindValue(j,params[j]);
+        }
+        success = m_query.exec();
+        if(!success){
+            QSqlError lastError = m_query.lastError();
+            qDebug()<<lastError.driverText()<<QString(QObject::tr("更新失败"));
+            QVERIFY2(success,"Failure");
+        }
     }
+    qDebug()<<QString(QObject::tr("更新 %1 条记录，耗时： %2 ms")).arg(records).arg(m_timer.elapsed());
+
+}
+
+void DaoTest::test5Delete(){
+    m_timer.restart();
+    m_query.clear();
+    bool success = m_query.exec("delete from automobile where id=15");
+    qDebug()<<QString(QObject::tr("删除 %1 条记录，耗时： %2 ms")).arg(1).arg(m_timer.elapsed());
     QVERIFY2(success,"Failure");
-    */
 }
 
 void DaoTest::testCase1_data()
