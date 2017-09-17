@@ -1,0 +1,4 @@
+translatorutil  -- 多国语言
+dbconnectdlg -- 数据库连接信息配置对话框
+dbdao  -- 标准化数据库操作包
+stringutil -- 字符串转换包（重要的是关于内存泄露的测试案例）

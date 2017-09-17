@@ -35,7 +35,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include "util/translatorutil.h"
+#include "../utils/translatorutil.h"
 
 int main(int argc, char *argv[])
 {

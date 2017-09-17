@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QDebug>
 
-#include "util/translatorutil.h"
+#include "../utils/translatorutil.h"
 
 LangSwitch::LangSwitch(QWidget *parent)
     : QWidget(parent)
