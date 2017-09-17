@@ -6,7 +6,7 @@
 #include <QVariant>
 #include <QSqlError>
 
-#include "../../util/dbdao.h"
+#include "../../../utils/dbdao.h"
 
 class DaoTest : public QObject
 {
@@ -33,7 +33,7 @@ private Q_SLOTS:
 DaoTest::DaoTest()
 {
     DatabaseConnectInfo connectInfo;
-    connectInfo.enumDbType=DBTYPE::SQLITE;
+    connectInfo.strDatabaseDriver="QSQLITE";
     connectInfo.strUserName="jjq";
     connectInfo.strPassword="";
     connectInfo.strHostName="localhost";

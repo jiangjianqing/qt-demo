@@ -28,9 +28,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         tst_daotest.cpp \ 
-    ../../util/dbdao.cpp
+    ../../../utils/dbdao.cpp
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 HEADERS += \
-    ../../util/dbdao.h
+    ../../../utils/dbdao.h
