@@ -39,7 +39,7 @@ DaoTest::DaoTest()
     connectInfo.strHostName="localhost";
     connectInfo.strDatabaseName="qtDB.db";
 
-    if (m_dao.connect(connectInfo) == false){
+    if (m_dao.connect(connectInfo).type() != QSqlError::NoError){
         qDebug()<<QObject::tr("连接数据库失败");
         return;
     }

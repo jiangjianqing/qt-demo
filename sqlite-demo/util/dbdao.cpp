@@ -1,6 +1,7 @@
 #include "dbdao.h"
 #include <QDebug>
 #include <QSqlDriver>
+#include <QSqlError>
 
 DBDao::DBDao()
 {
@@ -15,7 +16,7 @@ DBDao::~DBDao()
     //QSqlDatabase::removeDatabase(QSqlDatabase::database().connectionName());
 }
 
-bool DBDao::connect(DatabaseConnectInfo & connectInfo){
+QSqlError DBDao::connect(DatabaseConnectInfo & connectInfo){
     QString qstrType;
     switch (connectInfo.enumDbType) {
     case DBTYPE::SQLITE:
@@ -38,7 +39,13 @@ bool DBDao::connect(DatabaseConnectInfo & connectInfo){
     m_db.setConnectOptions(connectInfo.strConnectOptions);
 
     //如果打开数据库出现错误，则错误信息通过m_db.lastError()获取
-    return m_db.open();
+    //err.type() == QSqlError::NoError; 判断是否存在错误的标准方法
+    QSqlError err;
+    if (m_db.open()==false){
+
+        err = m_db.lastError();
+    }
+    return err;
 }
 
 QSqlQuery DBDao::createQuery(const QString &query){

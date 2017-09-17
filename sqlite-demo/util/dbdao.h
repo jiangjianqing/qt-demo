@@ -26,7 +26,7 @@ private:
 public:
     DBDao();
     ~DBDao();
-    bool connect(DatabaseConnectInfo &connectInfo);
+    QSqlError connect(DatabaseConnectInfo &connectInfo);
     QSqlQuery createQuery(const QString &query = QString());
 
     //重要：用于获取QSqlQuery的记录数
