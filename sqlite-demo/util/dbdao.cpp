@@ -1,5 +1,6 @@
 #include "dbdao.h"
 #include <QDebug>
+#include <QSqlDriver>
 
 DBDao::DBDao()
 {
@@ -43,6 +44,22 @@ bool DBDao::connect(DatabaseConnectInfo & connectInfo){
 QSqlQuery DBDao::createQuery(const QString &query){
     QSqlQuery qry(query,m_db);
     return qry;
+}
+
+int DBDao::getQuerySize(QSqlQuery & query){
+    //defaultDB.driver()->hasFeature(QSqlDriver::QuerySize)
+    if (m_db.driver()->hasFeature(QSqlDriver::QuerySize)) {
+
+        return  query.size();
+
+    } else {
+
+        // this can be very slow
+        qDebug()<<"当前数据库没有提供QuerySize，查询速度会比较慢";
+        query.last();
+        return query.at() + 1;
+
+    }
 }
 
 /*

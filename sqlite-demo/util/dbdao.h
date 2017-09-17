@@ -28,6 +28,7 @@ public:
     ~DBDao();
     bool connect(DatabaseConnectInfo &connectInfo);
     QSqlQuery createQuery(const QString &query = QString());
+    int getQuerySize(QSqlQuery & query);
     //const QSqlError & getLastError();
 };
 

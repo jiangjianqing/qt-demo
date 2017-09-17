@@ -2,10 +2,6 @@
 #include <QDebug>
 #include "util/stringutil.h"
 #include "util/dbdao.h"
-#include <QSqlRecord>
-#include <QTime>
-#include <QVariant>
-#include <QSqlError>
 
 void doStringExample(){
     qDebug()<<"故意泄露的范例，借此理解valgrind的判定机制"<<endl;
@@ -39,79 +35,12 @@ void doStringExample(){
     //delete []mm;
 }
 
-void doDBExample(){
-    DatabaseConnectInfo connectInfo;
-    connectInfo.enumDbType=DBTYPE::SQLITE;
-    connectInfo.strUserName="jjq";
-    connectInfo.strPassword="";
-    connectInfo.strHostName="localhost";
-    connectInfo.strDatabaseName="qtDB.db";
-
-    DBDao dao;
-    if (dao.connect(connectInfo) == false){
-        qDebug()<<QObject::tr("连接数据库失败");
-        return;
-    }
-    qDebug()<<QObject::tr("连接数据库成功");
-
-    QSqlQuery query= dao.createQuery();
-    query.exec("drop table automobile");
-    QString sql = "create table automobile "
-                  "(id int primary key,"
-                  "attribute varchar,"
-                  "type varchar,"
-                  "kind varchar,"
-                  "nation int,"
-                  "carnumber int,"
-                  "elevaltor int,"
-                  "distance int,"
-                  "oil int,"
-                  "temperature int)";
-    qDebug()<<sql;
-    bool success = query.exec(sql);
-
-    if(success){
-        qDebug()<<QObject::tr("数据库表创建成功");
-    }else{
-        qDebug()<<QObject::tr("数据库表创建失败");
-    }
-
-    query.exec("select * from automobile");
-    QSqlRecord rec = query.record();
-    qDebug()<<QObject::tr("automobile 表字段数:")<<rec.count();
-
-    //插入记录
-    QTime t;
-    t.start();
-    query.prepare("insert into automobile values(?,?,?,?,?,?,?,?,?,?)");
-
-    QVariant params[9]={
-        "四轮","轿车","富康",rand()%100,rand()%10000,rand()%300,rand()%200000,rand()%52,rand()%100
-    };
-    long records = 100;
-    for(int i=0;i<records;i++){
-        for(int j=0;j<9;j++){
-            query.bindValue(0,i);
-            query.bindValue(j+1,params[j]);
-        }
-        success=query.exec();
-        if(!success){
-            QSqlError lastError = query.lastError();
-            //重要：lastError.driverText()的值由数据库返回错误原因:比如"Parameter count mismatch"
-            qDebug()<<lastError.driverText()<<QObject::tr("插入失败");
-        }
-    }
-    qDebug()<<QString(QObject::tr("插入 %1 条记录，耗时： %2 ms")).arg(records).arg(t.elapsed());
-
-}
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
     doStringExample();
-
-    doDBExample();
 
     return a.exec();
 }
