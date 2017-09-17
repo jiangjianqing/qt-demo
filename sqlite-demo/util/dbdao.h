@@ -2,22 +2,33 @@
 #define DBDAO_H
 
 #include <QSqlDatabase>
+#include <QSqlQuery>
 
 enum DBTYPE{
     SQLITE,MYSQL
 };
 
-struct ConnectInfo{
+typedef struct {
+    DBTYPE enumDbType;
+    QString strHostName;
+    QString strDatabaseName;
+    QString strUserName;
+    QString strPassword;
+    int intPort;
+    QString strConnectOptions;
 
-};
+} DatabaseConnectInfo;
 
 class DBDao
 {
 private:
-    QSqlDatabase db;
+    QSqlDatabase m_db;
 public:
     DBDao();
     ~DBDao();
+    bool connect(DatabaseConnectInfo &connectInfo);
+    QSqlQuery createQuery(const QString &query = QString());
+    //const QSqlError & getLastError();
 };
 
 #endif // DBDAO_H
