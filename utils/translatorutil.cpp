@@ -38,6 +38,6 @@ void TranslatorUtil::changeTr(const QString& langCode)
     {
             qApp->installTranslator(translator);
     }else{
-        qDebug()<<"没有加载所需translator qm文件失败："<<qmFilename;
+        qDebug()<<QString("加载translator所需的qm文件失败:")<<qmFilename;
     }
 }

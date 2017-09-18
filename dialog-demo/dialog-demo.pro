@@ -33,7 +33,7 @@ contains(TARGET_ARCH, x86_64) {
 CONFIG+=debug_and_release
 CONFIG(debug, debug|release){#TARGET = ui_debug
     win32 {
-        LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
+        LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2015_64bit-Debug/debug -lmydll
     }
     unix{
         LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_GCC_64bit-Debug -lmydll
@@ -41,7 +41,7 @@ CONFIG(debug, debug|release){#TARGET = ui_debug
 } else {#TARGET = ui_release
 
     win32 {
-        LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2017_64bit-Debug/debug -lmydll
+        LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_MSVC2015_64bit-Debug/debug -lmydll
     }
     unix{
         LIBS += -L$$PWD/../build/mydll-Desktop_Qt_5_9_1_GCC_64bit-Release -lmydll
