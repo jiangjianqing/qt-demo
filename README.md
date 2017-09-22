@@ -1,3 +1,13 @@
+2017.09.23:
+要让环境变量在qt  .pro中有效，一定要将环境变量写入/etc/profile  。（配置halcon时遇到了该问题）
+
+windows与linux兼容性问题:
+window下C++编程转到linux系统下：
+定义字节符：typedef unsigned char BYTE;
+
+error: ‘LONGLONG’ does not name a type
+定义字节符:typedef int64_t LONGLONG;
+
 2017.09.13:
 valgrind 3.13存在bug，无法从QT Creator中，等待新版本
 
