@@ -2,6 +2,7 @@
 2017.09.23:
 要让环境变量在qt  .pro中有效，一定要将环境变量写入/etc/profile  。（配置halcon时遇到了该问题）
 在linux下debug需要安装gdb.
+在windows下通过winsdksetup.exe来安装cdb,安装后还需要在qt-creator的 Tools->options->Build & Run->Kits中选择Debugger为x64。
 
 windows与linux兼容性问题:
 window下C++编程转到linux系统下：
