@@ -34,7 +34,8 @@ HEADERS += \
         mainwindow.h \
     ../utils/stringutil.h \
     ../utils/dbdao.h \
-    ../utils/dbconnectdlg.h
+    ../utils/dbconnectdlg.h \
+    ../utils/taskcpp.h
 
 FORMS += \
         mainwindow.ui \
