@@ -1,5 +1,7 @@
+
 2017.09.23:
 要让环境变量在qt  .pro中有效，一定要将环境变量写入/etc/profile  。（配置halcon时遇到了该问题）
+在linux下debug需要安装gdb.
 
 windows与linux兼容性问题:
 window下C++编程转到linux系统下：

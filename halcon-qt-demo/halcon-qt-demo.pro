@@ -42,7 +42,8 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h \
-    halconutil.h
+    halconutil.h \
+    ../utils/msvc_compatible.h
 
 FORMS += \
         mainwindow.ui

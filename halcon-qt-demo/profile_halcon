@@ -1,0 +1,35 @@
+#linux下运行一般是写makefile，具体见programmers_guide.pdf
+#现在教点偷懒的方法
+#1. 在桌面新建project文件夹，
+#    复制/opt/halcon/examples/cpp/console里面的makefiles和source两个文件夹到project里面
+#2. 复制/opt/halcon下的include、lib和license文件夹到project里面
+#    复制/opt/halcon/example/images/board文件夹到/project/examples/images里面
+#3. 在project文件夹新建.profile_halcon文件，写入上述安装时的内容
+#     注意调整路径，将
+#    HALCONROOT="/opt/halcon"; export HALCONROOT
+#     改为 HALCONROOT=$(cd `dirname $0`; pwd); export HALCONROOT
+#    这个$(cd `dirname $0`; pwd) 指的是当前文件夹路径
+#4.  在终端输入source .profile_halcon，将路径配置到系统环境中，
+#      ps：这个是为了project这个文件夹可以移植到别的linux上面，不过每次运行前都得source一下才可以，
+#               移植时可以写在shell启动的固定的系统变量里面
+#5.  在终端cd 到project/makefiles文件夹路径，输入make，编译
+#6. 编译成功的话在project文件夹下会出现bin文件夹，在/project/bin/x64-linux/下会有可执行程序，拖到终端运行
+#7. 恭喜你，你成功了 
+
+#Sample shell script for HALCON environment settings
+#(sh syntax)
+#If you are using the Bourne shell source this file with the following
+#command:
+#source .profile_halcon
+HALCONARCH="x64-linux"; export HALCONARCH
+HALCONROOT="/opt/halcon"; export HALCONROOT
+HALCONEXAMPLES="${HALCONROOT}/examples"; export HALCONEXAMPLES
+HALCONIMAGES="${HALCONROOT}/examples/images"; export HALCONIMAGES
+PATH="${HALCONROOT}/bin/${HALCONARCH}:${HALCONROOT}/FLEXlm/${HALCONARCH}:${PATH}";
+export PATH
+if [ "${LD_LIBRARY_PATH}" ] ; then
+LD_LIBRARY_PATH="${HALCONROOT}/lib/${HALCONARCH}:${LD_LIBRARY_PATH}";
+export LD_LIBRARY_PATH
+else
+LD_LIBRARY_PATH="${HALCONROOT}/lib/${HALCONARCH}"; export LD_LIBRARY_PATH
+fi

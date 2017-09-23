@@ -6,7 +6,7 @@ HalconUtil::HalconUtil()
 }
 
 //通过HImage获取图像高度和宽度以及数据指针
-int HalconUtil::getCImageDataFromHImage(HImage* hImg,unsigned char** ppImg,int* pnWidth,int* pnHeight,int* pnChannel)
+int HalconUtil::getCImageDataFromHImage(HImage* hImg,BYTE** ppImg,int* pnWidth,int* pnHeight,int* pnChannel)
 {
     HTuple channels;
 
@@ -36,7 +36,7 @@ int HalconUtil::getCImageDataFromHImage(HImage* hImg,unsigned char** ppImg,int* 
         Pixels_per_channel=width*height;
         *pnWidth=(int)width;
         *pnHeight=(int)height;
-        *ppImg=(unsigned char*)malloc(Pixels_per_channel);
+        *ppImg=(BYTE*)malloc(Pixels_per_channel);
         memcpy(*ppImg,potImg,Pixels_per_channel);
 
     }
@@ -46,15 +46,15 @@ int HalconUtil::getCImageDataFromHImage(HImage* hImg,unsigned char** ppImg,int* 
         Pixels_per_channel=width*height;
         *pnWidth=(int)width;
         *pnHeight=(int)height;
-        *ppImg=(unsigned char*)malloc(Pixels_per_channel*3);
+        *ppImg=(BYTE*)malloc(Pixels_per_channel*3);
         /*memcpy(*ppImg,potRed,Pixels_per_channel);*/
         //转化为字符类型的指针，指针才能偏移
 
         for(int i=0;i<(*pnWidth)*(*pnHeight);i++)
         {
-            *((*ppImg)+3*i)=*((unsigned char*)potRed+i);
-            *((*ppImg)+3*i+1)=*((unsigned char*)potGreen+i);
-            *((*ppImg)+3*i+2)=*((unsigned char*)potBlue+i);
+            *((*ppImg)+3*i)=*((BYTE*)potRed+i);
+            *((*ppImg)+3*i+1)=*((BYTE*)potGreen+i);
+            *((*ppImg)+3*i+2)=*((BYTE*)potBlue+i);
         }
 
 
