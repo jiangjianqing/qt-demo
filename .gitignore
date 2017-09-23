@@ -1,4 +1,13 @@
 build-*-Desktop_Qt_*/
 build/
-*.pro.user
+*.pro.user*
 *.autosave
+
+
+x64/
+GeneratedFiles/
+*.sdf
+*.opensdf
+.vs/
+*.vcxproj.user*
+*.vcxproj.filters*
