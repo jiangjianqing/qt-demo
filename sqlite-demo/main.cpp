@@ -37,5 +37,16 @@ int main(int argc, char *argv[])
        return 0;
     }).get(1);
 
+    TaskGroup g;
+    std::function<int()> f = []()->int{
+        qDebug()<<"ok0";
+        return 0;
+    };
+    auto f1 = []{
+        qDebug()<<"ok1";
+    };
+    g.run(f,f1);
+
+
     return a.exec();
 }

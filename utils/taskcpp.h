@@ -4,6 +4,10 @@
 #include <future>
 #include <iostream> //std::out
 #include <functional> //std::function
+
+#include <vector>
+#include <map>
+
 //using namespace std;
 
 template<typename T>
@@ -54,6 +58,43 @@ public:
      */
     std::shared_future<R> run(){
         return std::async(m_fn);
+    }
+};
+
+//无法用std::shared_future<void>完成声明，所有用template完成
+//template<typename R>
+class TaskGroup{
+
+    std::vector<std::shared_future<int>> m_voidGroup;
+    //std::vector<std::shared_future<R>> m_voidGroup;
+
+public:
+    TaskGroup(){
+
+    }
+    ~TaskGroup(){
+
+    }
+
+    void run(Task<int()>&& task){
+        m_voidGroup.push_back(task.run());
+    }
+
+    template<typename F>
+    void run(F&& f){
+        run(Task<std::result_of<F()>::type()>(std::forward<F>(f)));
+    }
+
+    template<typename F,typename... Funs>
+    void run(F&& first,Funs&&... rest){
+        run(std::forward<F>(first));
+        run(std::forward<Funs>(rest)...);
+    }
+
+    void wait(){
+        for(auto it = m_voidGroup.begin();it != m_voidGroup.end();++it){
+            it->get();
+        }
     }
 };
 
