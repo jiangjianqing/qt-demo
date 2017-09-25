@@ -38,12 +38,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    halconutil.cpp
+    halconutil.cpp \
+    ../utils/stringutil.cpp
 
 HEADERS += \
         mainwindow.h \
     halconutil.h \
-    ../utils/msvc_compatible.h
+    ../utils/msvc_compatible.h \
+    ../utils/stringutil.h
 
 FORMS += \
         mainwindow.ui
