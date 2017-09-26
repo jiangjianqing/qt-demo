@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
+#include <QDebug>
 #include <QMessageBox>
 #include "../utils/stringutil.h"
 
@@ -34,15 +35,19 @@ void MainWindow::on_btnLoadImage_clicked()
         return;
     }
 
+    //qDebug()<<StringUtil::qstring2pchar(filePath);
+    HTuple htuple1;
+    htuple1[0] = StringUtil::qstring2pchar(filePath);
 
-    ReadImage(&img, StringUtil::qstring2pchar(filePath));
+
+    ReadImage(&img, htuple1);
 
     Hlong width, height;
     img.GetImageSize(&width, &height);
 
     //在qt界面中显示HImage
-    Hlong winID=(Hlong)this->winId();//添加位置qt混合添加段
-    //hv_WindowID = (Hlong)ui->graphicsView->window()->winId();
+    //Hlong winID=(Hlong)this->winId();//获取当前窗体的winId
+    Hlong winID=(Hlong)ui->graphicsView->window()->winId();//获取graphicsView的winId
     OpenWindow(0, 0, 0.5*width, 0.5*height,winID,"","",&hv_WindowID);//修改这句 添加winID
     //OpenWindow(0,0,hv_Width/7,hv_Height/7,winID,"","",&hv_WindowID);//修改这句 添加winID
     HDevWindowStack::Push(hv_WindowID);
