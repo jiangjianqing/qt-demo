@@ -1,0 +1,12 @@
+Qt的库很庞大，并且使用本来特性就包罗万象的C++，不能贪多只能慢慢来。Qt的signal/slot机制算是很重要的一个环节。除此之外我讲一个signal/slot与QEventLoop结合的小技巧，直接贴代码：QNetworkAccessManager m;
+QNetworkRequest req(QUrl("http://www.google.com"));
+QNetworkReply* rep = m.get(req);
+QEventLoop l;
+QObject::connect(rep, SIGNAL(finished()), &l, SLOT(quit()));
+l.exec();
+上面的代码可以实现使用get方法获取页面内容的同时又不阻塞界面UI。是不是挺好玩儿的？
+
+作者：匿名用户
+链接：https://www.zhihu.com/question/27040542/answer/35168876
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
