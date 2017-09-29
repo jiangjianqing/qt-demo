@@ -4,7 +4,10 @@ cmake_minimum_required(VERSION 3.0)
 set(PROJECT_NAME testcv)
 project(${PROJECT_NAME})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+#The -std=c++11 option is for GCC/CLang only, it is not available in Visual Studio.
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif()
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 
 file(GLOB_RECURSE HEADERS *.h)
