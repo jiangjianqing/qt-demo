@@ -1,6 +1,15 @@
 这里 g++ 编译的时候注意链接的库是要按顺序的（我也是才知道）。
 gcc 和 g++ 中库的链接顺序是从右往左进行，所以要把最基础实现的库放在最后，这样左边的 lib 就可以调用右边的 lib 中的代码。
 
+2017.10.10
+qt在linux下支持中文输入法的解决步骤：
+1)、安装qt5输入法插件 sudo apt-get install fcitx-libs-qt5
+2）、将fcitx-qt5 输入法插件复制到当前用户目录 并加上可执行权限
+    cp /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so .
+    chmod +x libfcitxplatforminputcontextplugin.so
+3）、在qt目录下查找插件存放的路径  find . -name platforminputcontexts   #两个路径都要复制输入法插件
+4)、将输入法插件复制到上述目录中
+
 2017.09.23:
 要让环境变量在qt  .pro中有效，一定要将环境变量写入/etc/profile  。（配置halcon时遇到了该问题）
 在linux下debug需要安装gdb.
