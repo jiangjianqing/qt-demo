@@ -1,3 +1,14 @@
+2017.10.14:
+环境:linux manjaro ,gcc版本7.2.0,
+使用cmake-gui生成的build执行make命令，出现错误：.../6.2.0/cstdlib:75:25: fatal error: stdlib.h: No such file or directory
+ #include_next <stdlib.h>
+原因：可能是gcc版本过高
+解决办法：
+	Try by disabling pre-compiled headers, either from cmake-gui or using the command line parameter：
+	-DENABLE_PRECOMPILED_HEADERS=OFF
+
+
+
 ##注意事项：
 1、ImagePlay当前只支持opencv3.1
 2、cmake版本存在一定的不兼容情况：
