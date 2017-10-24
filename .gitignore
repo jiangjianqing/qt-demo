@@ -10,3 +10,5 @@ GeneratedFiles/
 *.opensdf
 .vs/
 *.vcxproj.user*
+
+*.VC.db
