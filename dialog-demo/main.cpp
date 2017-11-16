@@ -53,5 +53,10 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    return a.exec();
+    int ret = a.exec();
+
+    //2017.11.16 退出前清理内存防止内存泄露
+    TranslatorUtil::clear();
+
+    return ret;
 }

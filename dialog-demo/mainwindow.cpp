@@ -59,10 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
 
-    //---------菜单栏--------------------
-    QMenu *menu1= new QMenu("hello");
-    menu1->addAction("菜单项1");
-    menu1->addAction("菜单项2");
+
 
 
 
@@ -72,9 +69,13 @@ MainWindow::MainWindow(QWidget *parent) :
         qDebug()<< act->text() <<"triggered";
     }*/
 
-    QMenu *file_menu=new QMenu("文件");
+    QMenu *file_menu=new QMenu("文件",ui->menuBar);
     file_menu->addAction("打开");//可用返回的QAction 连接槽函数
 
+    //---------菜单栏--------------------
+    QMenu *menu1= new QMenu("hello",file_menu);
+    menu1->addAction("菜单项1");
+    menu1->addAction("菜单项2");
 
     //添加菜单项，添加动作
     QAction * pNew = file_menu->addAction("新建");
@@ -123,9 +124,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //resize(..);指定窗口大小
     showMaximized();
 
-    pArray[0] = menu1;
-    pArray[1] = file_menu;
-    //pArray[pPosition++] = btnHello;
+    //pArray[0] = menu1;
+    //pArray[1] = file_menu;
+
 
     //file_menu->deleteLater();
    // menu1->deleteLater();
@@ -140,12 +141,17 @@ MainWindow::~MainWindow()
     //1、deleteLater()无法控制泄露，但在MainWindow构造函数中可以
     //2、delete void*不行，Visual Leak Detector退出时崩溃，无法获得泄露数据
     //3、delete 原类型指针，获得正确效果！！！！！！
-    QMenu *menu1 = (QMenu *)pArray[0];
+
+    //2017.11.16 重要发现，QT组件内存泄露的最好方法是在构造函数中指定parent，
+    //因为QT的组件都派生于QObject，其释放由其parent完成，QT不建议自己调用delete
+
+    //以下delete代码废弃
+    //QMenu *menu1 = (QMenu *)pArray[0];
     //void *menu1_p = pArray[0];
-    delete menu1;//->deleteLater();
-    QMenu *file_menu = (QMenu *)pArray[1];
+    //delete menu1;//->deleteLater();
+    //QMenu *file_menu = (QMenu *)pArray[1];
     //void *file_menu_p = pArray[1];
-    delete file_menu;//->deleteLater();
+    //delete file_menu;//->deleteLater();
 
     qDebug()<<"**程序退出,这里表示正确处理内存泄露";
     //qt默认

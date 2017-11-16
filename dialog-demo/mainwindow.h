@@ -28,7 +28,6 @@ private:
 
     const double PI = 3.1415926;
 
-    void *  pArray[20];
 };
 
 #endif // MAINWINDOW_H
