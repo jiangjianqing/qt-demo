@@ -1,4 +1,4 @@
-Qt的库很庞大，并且使用本来特性就包罗万象的C++，不能贪多只能慢慢来。Qt的signal/slot机制算是很重要的一个环节。除此之外我讲一个signal/slot与QEventLoop结合的小技巧，直接贴代码：QNetworkAccessManager m;
+﻿Qt的库很庞大，并且使用本来特性就包罗万象的C++，不能贪多只能慢慢来。Qt的signal/slot机制算是很重要的一个环节。除此之外我讲一个signal/slot与QEventLoop结合的小技巧，直接贴代码：QNetworkAccessManager m;
 QNetworkRequest req(QUrl("http://www.google.com"));
 QNetworkReply* rep = m.get(req);
 QEventLoop l;
@@ -6,7 +6,54 @@ QObject::connect(rep, SIGNAL(finished()), &l, SLOT(quit()));
 l.exec();
 上面的代码可以实现使用get方法获取页面内容的同时又不阻塞界面UI。是不是挺好玩儿的？
 
-作者：匿名用户
-链接：https://www.zhihu.com/question/27040542/answer/35168876
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+//--------------------------------------------------------
+
+如果我们将一个QSlider对象的valueChanged信号链接到一个QSpinBox对象的setValue槽，使用传统方式：
+
+connect(slider, SIGNAL(valueChanged(int)), spinbox, SLOT(setValue(int)));
+
+而使用新式语法，这个样子：
+
+connect(slider, &QSlider::valueChanged, spinbox, &QSpinBox::setValue);
+
+使用新式语法：
+
+    编译期：检查信号与槽是否存在，参数类型检查，Q_OBJECT是否存在
+    信号可以和普通的函数、类的普通成员函数、lambda函数连接（而不再局限于信号函数和槽函数）
+    参数可以是 typedef 的或使用不同的namespace specifier
+    可以允许一些自动的类型转换（即信号和槽参数类型不必完全匹配）
+
+
+QHBoxLayout * layout = new QHBoxLayout(this);
+    QSlider * slider = new QSlider(Qt::Horizontal);
+    QSpinBox * spinbox = new QSpinBox;
+    layout->addWidget(spinbox);
+    layout->addWidget(slider);
+
+    connect(slider, &QSlider::valueChanged, spinbox, &QSpinBox::setValue);
+    connect(spinbox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), slider, &QSlider::setValue);
+
+
+#Qt的槽函数是没有返回值的，都是返回void
+#在槽函数中可以通过sender()得到信号的发送对象，比如：右键菜单哪个菜单项被单击
+
+
+
+Q_PROPERTY(int Qtvalue READ testValue WRITE setTestValue)
+#这一行的作用是将属性 Qtvalue 注册到Qt的元对象系统中，Q_PROPERTY是Qt元对象系统的一部分。
+
+
+要求是在QGraphicsView中进行界面设计，现在要求有文字输入框，但QGraphicsScene的addItem不能添加QWidget，怎么解决？
+QGraphicsSimpleTextItem provides a simple text label item
+QGraphicsTextItem provides an advanced text browser item
+这两个（反正第二个肯定可以的，第一个应该只是简单的lable），生成实例设置flag为Qt::TextEditorInteraction添加到screen就好了。
+
+
+#GraphicsView做缩放,在对view缩放的时候正常情况下 下面的所有item都会跟着放大或者缩小 但是现在希望textEdit文本框的大小不变
+QGraphicsProxyWidget* pProxyWidget = graphicsScene->addWidget(m_pTextEdit, Qt::ToolTip);
+                    palette.setBrush(QPalette::Window,QBrush(QColor(255,0,0,0)));
+                    pProxyWidget->setPalette(palette);
+ 
+                    pProxyWidget->setParentItem(this);
+                    pProxyWidget->resize(100,100);
+                    pProxyWidget->setPos( rect.x()+rect.width()+5,rect.y()-50);
