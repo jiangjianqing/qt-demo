@@ -57,3 +57,28 @@ QGraphicsProxyWidget* pProxyWidget = graphicsScene->addWidget(m_pTextEdit, Qt::T
                     pProxyWidget->setParentItem(this);
                     pProxyWidget->resize(100,100);
                     pProxyWidget->setPos( rect.x()+rect.width()+5,rect.y()-50);
+
+
+//----------------------------------------------------------------------------------
+QT事件调用顺序
+
+bool eventFilter(QObject watched, QEvent *event)(过滤器) -> bool event(QEvent *e) -> event处理函数(例如void mousePressEvent(QMouseEvent )等)
+
+eventFilter过滤器 return true ，则对该事件不进行分发 ， return false ， 则对该事件继续分发到各个event处理函数 。
+关于分发
+
+eventFilter 如果返回 false 则会调用 event 函数 进行控制 ， event 函数会 向下分发给 事件处理函数（如mousePressEvent） .
+同理 如果event 返回 false ，则向下分发给 事件处理函数， 如果返回 true 则不会分发给相应的事件处理函数.
+
+如果安装了多个事件处理器 , 则 先安装的后调用, 即后装先调 .
+
+QApplication a(argc, argv);
+a.installEventFilter(obj) ; //安装全局事件过滤器 ，obj 中 应重写了eventFilter函数。
+
+全局事件过滤器被第一个调用，之后是该对象上面的事件过滤器，其次是
+event() 函数，最后是特定的事件处理函数。
+注意！！！
+
+事件过滤器和被安装过滤器的组件必须在同一线程，否则，过滤器将不起作用。另外，如果在安
+装过滤器之后，这两个组件到了不同的线程，那么，只有等到二者重新回到同一线程的时候过滤
+器才会有效。
